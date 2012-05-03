@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>ws demo</title>
+</head>
+<body>
+<code>hello</code>
+
+<script>
+
+var ws = new WebSocket("ws://" + window.location.host);
+
+ws.onopen = function () {
+	ws.send("hello, server.");
+};
+
+ws.onmessage = function (msg) {
+	console.log(msg.data);
+}
+
+</script>
+
+</body>
+</html>

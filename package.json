@@ -1,0 +1,19 @@
+{
+  "author": "",
+  "name": "wsfun",
+  "description": "minimalist nodejs ws server",
+  "version": "0.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/railnerd/wsfun.git"
+  },
+  "dependencies": {
+    "connect":"2.x.x",
+    "ws":"0.4.x"
+  },
+  "devDependencies": {},
+  "optionalDependencies": {},
+  "engines": {
+    "node": "*"
+  }
+}
