@@ -1,6 +1,5 @@
 var connect = require('connect');
 var server = connect()
-	.use(connect.logger('dev'))
 	.use(connect.static(__dirname + '/static'))
 	.listen(3000);
 
@@ -18,7 +17,6 @@ wss.on('connection', function(ws) {
   });
 
   ws.on('close', function() {
-    console.log('kthxbai!');
     numClients--;
     broadcastToClients(numClients + ' client(s)');
   });
