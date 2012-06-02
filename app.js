@@ -3,8 +3,8 @@ var server = connect()
 	.use(connect.static(__dirname + '/static'))
 	.listen(3000);
 
-var WebSocketServer = require('ws').Server
-  ,wss = new WebSocketServer({server: server});
+var WebSocketServer = require('ws').Server,
+    wss = new WebSocketServer({server: server});
 
 var numClients = 0;
 
@@ -31,3 +31,7 @@ wss.on('connection', function(ws) {
 
   broadcastToClients(numClients + ' client(s)');
 });
+
+var mdns = require('mdns');
+var ad = mdns.createAdvertisement(mdns.tcp('http'), 3000, {name:"wsfun"});
+ad.start();
