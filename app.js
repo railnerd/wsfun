@@ -1,3 +1,7 @@
+/*jslint node: true */
+
+"use strict";
+
 var connect = require('connect');
 var server = connect()
 	.use(connect.static(__dirname + '/static'))
@@ -8,30 +12,30 @@ var WebSocketServer = require('ws').Server,
 
 var numClients = 0;
 
-wss.on('connection', function(ws) {
+wss.on('connection', function (ws) {
 
-  numClients++;
-
-  ws.on('message', function(message) {
-    console.log('received: %s', message);
-  });
-
-  ws.on('close', function() {
-    numClients--;
-    broadcastToClients(numClients + ' client(s)');
-  });
-  
-  function broadcastToClients(msg) {
-    for (var i in wss.clients) {
-      if (wss.clients.hasOwnProperty(i)) {
-        wss.clients[i].send(msg);
-      }
+    function broadcastToClients(msg) {
+        var i;
+        for (i in wss.clients) {
+            if (wss.clients.hasOwnProperty(i)) {
+                wss.clients[i].send(msg);
+            }
+        }
     }
-  }
 
-  broadcastToClients(numClients + ' client(s)');
+    ws.on('message', function (message) {
+        console.log('received: %s', message);
+    });
+
+    ws.on('close', function () {
+        numClients = numClients - 1;
+        broadcastToClients(numClients + ' client(s)');
+    });
+
+    numClients = numClients + 1;
+    broadcastToClients(numClients + ' client(s)');
 });
 
 var mdns = require('mdns');
-var ad = mdns.createAdvertisement(mdns.tcp('http'), 3000, {name:"wsfun"});
+var ad = mdns.createAdvertisement(mdns.tcp('http'), 3000, {name: "wsfun"});
 ad.start();
