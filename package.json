@@ -9,8 +9,8 @@
   },
   "dependencies": {
     "connect":"2.x.x",
-    "ws":"0.4.x"
-    "mdns":>="0.0.6"
+    "ws":"0.4.x",
+    "mdns":">=0.0.6"
   },
   "devDependencies": {},
   "optionalDependencies": {},
