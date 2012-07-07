@@ -1,4 +1,4 @@
-# minimalist nodejs ws server
+# websocket retro chat terminal
 
 ## License ##
 

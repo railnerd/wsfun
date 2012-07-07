@@ -2,21 +2,81 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8" />
-	<title>ws demo</title>
+	<title>chatterm</title>
+	<link href='http://fonts.googleapis.com/css?family=VT323' rel='stylesheet' type='text/css'>
+ 	<style>
+#screen {padding:1em; width:640px; background-color:#222; -moz-border-radius:15px; border-radius:15px;}
+#terminal {text-transform:uppercase; overflow:auto; width:640px; height:480px; font-family:'VT323',monospace; color:#2e2; }
+#cmdLine {width: 670px;}
+	</style>
 </head>
 <body>
-<code>hello</code>
 
-<script>
+<div id="screen">
+  <div id="terminal">
+  </div>
+</div>
+
+<input id="cmdLine" type="text"/>
+
+<script type="text/javascript">
+
+var cmdLine = document.getElementById("cmdLine");
+
+if(document.addEventListener) {
+  document.addEventListener("keypress",handleKeypress,false);
+}
+
+function handleKeypress(event) {
+  if (document.activeElement == cmdLine) {
+    if (event.keyCode == 13) {
+      ws.send(cmdLine.value);
+      cmdLine.value = "";
+    }
+  }
+}
 
 var ws = new WebSocket("ws://" + window.location.host);
 
 ws.onopen = function () {
-	ws.send("hello, server.");
+  addText("<span>Connected @" + timeStamp() + "<br /></span>");
 };
 
 ws.onmessage = function (msg) {
-	console.log(msg.data);
+	addText("<span>"+msg.data + "<br /><span>");
+}
+
+function clearScreen() {
+  var term = document.getElementById("terminal");
+  term.innerHTML = "";
+
+  // force redraw on webkit
+  term.style.display='none';
+  term.offsetHeight;
+  term.style.display='block';
+}
+
+function addText(newText) {
+  var term = document.getElementById("terminal");
+  term.innerHTML += newText;
+  term.scrollTop = term.scrollHeight;
+}
+
+function timeStamp() {
+  var now = new Date();
+  var hours = now.getHours();
+  var minutes = now.getMinutes();
+  var seconds = now.getSeconds();
+  
+  if (minutes < 10) {
+    minutes = "0" + minutes;
+  }
+
+  if (seconds < 10) {
+    seconds = "0" + seconds;
+  }
+  
+  return hours + ":" + minutes + ":" + seconds;
 }
 
 </script>

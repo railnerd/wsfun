@@ -24,7 +24,8 @@ wss.on('connection', function (ws) {
     }
 
     ws.on('message', function (message) {
-        console.log('received: %s', message);
+//      console.log('received: %s', message);
+        broadcastToClients(message);
     });
 
     ws.on('close', function () {
@@ -37,5 +38,5 @@ wss.on('connection', function (ws) {
 });
 
 var mdns = require('mdns');
-var ad = mdns.createAdvertisement(mdns.tcp('http'), 3000, {name: "wsfun"});
+var ad = mdns.createAdvertisement(mdns.tcp('http'), 3000, {name: "chatterm"});
 ad.start();
