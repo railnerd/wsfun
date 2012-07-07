@@ -37,6 +37,6 @@ wss.on('connection', function (ws) {
     broadcastToClients(numClients + ' client(s)');
 });
 
-var mdns = require('mdns');
-var ad = mdns.createAdvertisement(mdns.tcp('http'), 3000, {name: "chatterm"});
-ad.start();
+// var mdns = require('mdns');
+// var ad = mdns.createAdvertisement(mdns.tcp('http'), 3000, {name: "chatterm"});
+// ad.start();

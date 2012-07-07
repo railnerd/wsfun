@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="utf-8" />
-	<title>chatterm</title>
-	<link href='http://fonts.googleapis.com/css?family=VT323' rel='stylesheet' type='text/css'>
- 	<style>
+  <meta charset="utf-8" />
+  <title>chatterm</title>
+  <link href='http://fonts.googleapis.com/css?family=VT323' rel='stylesheet' type='text/css'>
+  <style>
 #screen {padding:1em; width:640px; background-color:#222; -moz-border-radius:15px; border-radius:15px;}
 #terminal {text-transform:uppercase; overflow:auto; width:640px; height:480px; font-family:'VT323',monospace; color:#2e2; }
 #cmdLine {width: 670px;}
-	</style>
+  </style>
 </head>
 <body>
 
@@ -39,11 +39,11 @@ function handleKeypress(event) {
 var ws = new WebSocket("ws://" + window.location.host);
 
 ws.onopen = function () {
-  addText("<span>Connected @" + timeStamp() + "<br /></span>");
+  addText("<span>Welcome to chatterm: " + timeStamp() + "<br /></span>");
 };
 
 ws.onmessage = function (msg) {
-	addText("<span>"+msg.data + "<br /><span>");
+  addText("<span>"+msg.data + "<br /><span>");
 }
 
 function clearScreen() {
