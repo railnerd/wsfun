@@ -8,8 +8,8 @@
     "url": "git://github.com/railnerd/wsfun.git"
   },
   "dependencies": {
-    "connect":"2.x.x",
-    "ws":"0.4.x"
+    "connect": ">=3.7.0",
+    "ws": ">=3.3.1"
   },
   "devDependencies": {},
   "optionalDependencies": {},
